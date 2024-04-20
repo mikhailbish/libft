@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 18:13:35 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/20 16:13:31 by mbutuzov         ###   ########.fr       */
+/*   Created: 2024/04/20 15:54:35 by mbutuzov          #+#    #+#             */
+/*   Updated: 2024/04/20 17:11:34 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	size_t total_length;
+	size_t dst_len;
+	size_t counter;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	dst_len = ft_strlen(dst);
+	total_length = dst_len + ft_strlen(src);
+	dst += dst_len;
+	counter = 0;
+	while(counter + dst_len < dstsize - 1 && src[counter])
+	{
+		dst[counter] = src[counter];
+		counter++;
+	}
+	if (dstsize && !(dstsize < dst_len))
+		dst[counter] = 0;
+	return (total_length);
 }

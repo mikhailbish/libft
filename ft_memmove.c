@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 18:13:35 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/20 16:13:31 by mbutuzov         ###   ########.fr       */
+/*   Created: 2024/04/20 14:29:37 by mbutuzov          #+#    #+#             */
+/*   Updated: 2024/04/20 15:16:28 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	char	*ch_src;
+	char	*ch_dst;
+	int		counter;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	ch_src = (char *)src;
+	ch_dst = (char *)dst;
+	counter = 0;
+	if ( ch_dst < ch_src && ch_dst < ch_src + len )
+	{
+		while (ch_src + len-- != ch_src)
+			*(ch_dst + len) = *(ch_src + len);
+	}
+	else
+	{
+		while (ch_src + len != ch_src + counter)
+		{
+			*(ch_dst + counter) = *(ch_src + counter);
+			counter++;
+		}
+	}
+	return dst;
 }
