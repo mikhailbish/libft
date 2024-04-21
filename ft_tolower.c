@@ -6,17 +6,16 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:20:08 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/20 17:27:34 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:41:26 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
 //handling local locale??
 int	ft_tolower(int c)
 {
-	if ( c >= 'a' && c <= 'z')
+	if (c >= 'a' && c <= 'z')
 		c += 32;
-	return c;
+	return (c);
 }

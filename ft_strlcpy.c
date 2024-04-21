@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 15:20:08 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/20 15:58:08 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:38:33 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	src_len;
-	size_t counter;
+	size_t	counter;
 
 	src_len = 0;
 	counter = 0;
@@ -23,8 +23,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	{
 		src_len++;
 	}
-	
-	while(counter < dstsize - 1 && src[counter])
+	while (counter < dstsize - 1 && src[counter])
 	{
 		dst[counter] = src[counter];
 		counter++;

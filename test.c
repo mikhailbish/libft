@@ -66,7 +66,7 @@ int main (void)
 	printf("%s\n",a);
 	printf("%s\n",b);*/
 
-	printf("%d\n", ft_atoi("92233720368547"));
-	printf("%d\n", 	  atoi("92233720368547"));
+	printf("%d\n", ft_atoi("-922337203685477"));
+	printf("%d\n", 	  atoi("-922337203685477"));
 	return 0;
 }
