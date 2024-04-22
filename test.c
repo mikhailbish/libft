@@ -65,8 +65,15 @@ int main (void)
 	char *b = strnstr("long ass message", "", 5);
 	printf("%s\n",a);
 	printf("%s\n",b);*/
-
-	printf("%d\n", ft_atoi("-922337203685477"));
-	printf("%d\n", 	  atoi("-922337203685477"));
+//	printf("%d\n", ft_atoi("922337203685477580"));
+//	printf("%d\n", 	  atoi("922337203685477680"));
+/*
+	char *ptr = (char *)ft_calloc(10, sizeof(char));
+	ptr[0] = 'a';
+	ptr[1] = 'b';
+	printf("%s", ptr);*/
+	char  *a = ft_strdup("hello there");
+	printf("%s", a);
+	free(a);
 	return 0;
 }

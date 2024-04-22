@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:49:10 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/21 21:08:06 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:17:05 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -44,16 +44,15 @@ static int	ft_overflow_handler(const char *num_str, int sign)
 	min_long = "9223372036854775808";
 	max_length = ft_strlen(max_long);
 	comparison_result = -1;
-	if (ft_numlen(num_str) >= ft_numlen(max_long))
-	{
-		if (sign == 1)
-			comparison_result = ft_strncmp(num_str, max_long, n_length);
-		else if (sign == -1)
-			comparison_result = ft_strncmp(num_str, min_long, n_length);
-	}
+	if (ft_numlen(num_str) == ft_numlen(max_long) && sign == 1)
+		comparison_result = ft_strncmp(num_str, max_long, n_length);
+	else if (ft_numlen(num_str) == ft_numlen(max_long) && sign == -1)
+		comparison_result = ft_strncmp(num_str, min_long, n_length);
+	if (ft_numlen(num_str) > ft_numlen(max_long))
+		comparison_result = 1;
 	if (comparison_result > 0 && sign > 0)
 		return (-1);
-	if (comparison_result < 0 && sign > 0)
+	if (comparison_result > 0 && sign < 0)
 		return (0);
 	return (1);
 }
