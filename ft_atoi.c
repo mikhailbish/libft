@@ -6,11 +6,11 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:49:10 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/22 17:17:05 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:51:55 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-
+// to make use of unsigned long type casting
 static char	*skip_spaces(char *str)
 {
 	while (*str == 't' || *str == '\n' || *str == '\v'

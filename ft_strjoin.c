@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 19:31:30 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/23 17:47:11 by mbutuzov         ###   ########.fr       */
+/*   Created: 2024/04/23 15:33:43 by mbutuzov          #+#    #+#             */
+/*   Updated: 2024/04/24 17:24:25 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*res_ptr;
+	int		total_length;
+	char	*result;
+	int		counter;
 
-	res_ptr = (unsigned char *)b;
-	while (len--)
+	counter = 0;
+	total_length = ft_strlen(s1) + ft_strlen(s2) + 1;
+	result = (char *)malloc(total_length * sizeof(char));
+	if (!result)
+		return (0);
+	while (*s1)
 	{
-		*res_ptr = (unsigned char)c;
-		res_ptr++;
+		result[counter] = *s1;
+		counter++;
+		s1++;
 	}
-	return (b);
+	while (*s2)
+	{
+		result[counter] = *s2;
+		counter++;
+		s2++;
+	}
+	result[counter] = 0;
+	return (result);
 }

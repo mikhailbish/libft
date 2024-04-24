@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <limits.h>
+
+const char *find_next_word(const char *s, char c);
 
 int main (void)
 {
@@ -65,15 +68,48 @@ int main (void)
 	char *b = strnstr("long ass message", "", 5);
 	printf("%s\n",a);
 	printf("%s\n",b);*/
-//	printf("%d\n", ft_atoi("922337203685477580"));
-//	printf("%d\n", 	  atoi("922337203685477680"));
+//	printf("%d\n", ft_atoi("-9223372036854775803"));
+//	printf("%d\n", 	  atoi("-9223372036854775803"));
+//	printf("%lu %ld \n", ULONG_MAX, LONG_MAX);
 /*
 	char *ptr = (char *)ft_calloc(10, sizeof(char));
 	ptr[0] = 'a';
 	ptr[1] = 'b';
 	printf("%s", ptr);*/
-	char  *a = ft_strdup("hello there");
+/*	char  *a = ft_strdup("hello there");
 	printf("%s", a);
-	free(a);
-	return 0;
+	free(a);*/
+	/*
+	char *asd = "asdwow";
+	char *ye = ft_strtrim(asd, "awos");
+	printf("%s", ye);
+	*/
+/*	char *ups = ft_strjoin("asd", "wow");
+	write(1, ups, 6);*/
+	
+
+	char *message = " here is my test text";
+	printf("%s\n", find_next_word(message, ' '));
+
+/*	char **words;
+
+	words = ft_split(message, ' ');
+	while (*words)
+	{
+		printf("%s\n", *words);
+		words++;
+	}*/
+	
+	return (0);
 }
+	const char *find_next_word(const char *s, char c)
+	{
+		if (!*(s+1))
+			return (0);
+		s++;
+		while (*s && *s != c)
+			s = ft_strchr(s, c);
+		if (*(s + 1))
+			return (++s);
+		return (0);
+	}
