@@ -43,7 +43,7 @@ C_FILES=$(foreach func, $(FUNCTIONS), $(func).c)
 O_FILES=$(foreach func, $(FUNCTIONS), $(func).o)
 
 $(NAME): $(O_FILES) libft.h
-	ar rc $(NAME) $(O_FILES)
+	ar rcs $(NAME) $(O_FILES)
 
 $(O_FILES): $(C_FILES)
 	cc -c $^
