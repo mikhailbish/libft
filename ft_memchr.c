@@ -6,12 +6,12 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:10:35 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/21 21:32:18 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:28:21 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+// TODO: add check of c == 0
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	char	*alt;

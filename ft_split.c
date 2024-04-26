@@ -1,44 +1,108 @@
-#include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
+/*   Updated: 2024/04/25 17:58:08 by mbutuzov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int get_word_length(const char * s, char c)
+#include "libft.h"
+
+static int	get_word_length(const char *s, char c)
 {
 	int	counter;
 
 	counter = 0;
-	while(*s && *s != c)
+	while (s[counter] && s[counter] != c)
 	{
 		counter++;
 	}
 	return (counter);
 }
-/*
-char *find_next_word(const char *s, char c)
-{
-	if (!*(s+1))
-		return (0);
-	s++;
-	while (*s && *s != c)
-		s = ft_strchr(s, c);
-	if (*s)
-		return (s);
-	return (0);
-}*/
-// couple of mallocs and done!
-char	**ft_split(char const *s, char c)
-{
-	int counter = 0;
-	int length;
-	const char* ws;
 
-	ws = s
+static const char	*ft_skip_char(const char *s, char c)
+{
+	while (*s == c)
+	{
+		s++;
+	}
+	return (s);
+}
+
+static int	count_words(const char *s, char c)
+{
+	int	length;
+	int	counter;
+
+	counter = 0;
 	length = -1;
+	s = ft_skip_char(s, c);
 	while (length)
 	{
-		length = get_word_length(ws);
-		ws += length;
+		length = get_word_length(s, c);
+		s += length;
+		s = ft_skip_char(s, c);
 		counter++;
 	}
-	
+	return (counter);
+}
+/*
+static void	ft_empty(char **final, int counter)
+{
+	while (counter--)
+		free(final[counter]);
+	free(final);
+}*/
+
+static int	ft_populate(char **final, const char *s, char c)
+{
+	int	length;
+	int	counter;
+
+	counter = 0;
+	length = -1;
+	s = ft_skip_char(s, c);
+	while (length)
+	{
+		length = get_word_length(s, c);
+		if (length)
+		{
+			*final = ft_substr(s, 0, length);
+			if (!*final)
+			{
+				while (counter--)
+					free(final[counter]);
+				return (0);
+			}
+			final++;
+		}
+		s += length;
+		s = ft_skip_char(s, c);
+		counter++;
+	}
+	return (counter);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**final;
+	int		counter;
+	int		result;
+
+	counter = count_words(s, c);
+	final = (char **)malloc(sizeof(char *) * counter);
+	if (!final)
+		return (0);
+	final[counter - 1] = 0;
+	result = ft_populate(final, s, c);
+	if (!result)
+	{
+		free(final);
+		return (0);
+	}
+	return (final);
 }
