@@ -94,8 +94,10 @@ int main (void)
 	char *ye = ft_strtrim(asd, "awos");
 	printf("%s", ye);
 	*/
-/*	char *ups = ft_strjoin("asd", "wow");
-	write(1, ups, 6);*/
+	char *ups = ft_strjoin("asd", "wow");
+	write(1, ups, 6);
+	free(ups);
+
 /*	char **words;
 
 	words = ft_split(message, ' ');
@@ -141,13 +143,14 @@ int main (void)
 	write(1, "\n", 1);
 	char next = (int)a->next + '0';
 	write(1, &next, 1);*/
-
+/*
 	char *content1 = "asd";
 	char *content2 = "wdsaf";
 
 	t_list *o = ft_lstnew(content1);
 	t_list *c = ft_lstnew(content2);
 	ft_lstadd_front(&o, c);
+	*/
 	/*
 	int l = ft_lstsize(c);
 	char m = l + '0';
@@ -156,7 +159,7 @@ int main (void)
 	*/
 //	t_list *some = ft_lstlast(o);
 //	write(1, (char *)some->content, ft_strlen(some->content));
-	
+/*	
 	char *content = "new in the end";
 	t_list *new = ft_lstnew(content);
 	ft_lstadd_back(&o, new);
@@ -167,5 +170,6 @@ int main (void)
 		c = c->next;
 	}
 	write(1, c->content, ft_strlen(c->content));
+	*/
 	return (0);
 }
