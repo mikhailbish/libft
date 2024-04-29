@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/25 17:58:08 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/28 20:59:56 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ static int	count_words(const char *s, char c)
 	}
 	return (counter);
 }
-/*
-static void	ft_empty(char **final, int counter)
-{
-	while (counter--)
-		free(final[counter]);
-	free(final);
-}*/
 
 static int	ft_populate(char **final, const char *s, char c)
 {

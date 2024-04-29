@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:34:49 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/21 21:40:45 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:15:47 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ char	*ft_strrchr(const char *s, int c)
 {
 	char	*a;
 	char	*last_occ;
+	char	character;
 
+	character = c;
 	a = (char *)s;
 	last_occ = 0;
 	while (*a)
 	{
-		if (c == *a)
+		if (character == *a)
 			last_occ = a;
 		a++;
 	}
-	if (c == *a)
+	if (character == *a)
 		last_occ = a;
 	return (last_occ);
 }

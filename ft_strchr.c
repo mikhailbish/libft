@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:27:46 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/25 21:21:42 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:13:38 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*a;
+	char	character;
 
-	a = (char *)s;
-	while (*a)
+	character = c;
+	while (*s)
 	{
-		if (c == *a)
-			return (a);
-		a++;
+		if (character == *s)
+			return ((char *)s);
+		s++;
 	}
-	if (c == *a)
-		return (a);
+	if (character == *s)
+		return ((char *)s);
 	return (0);
 }
