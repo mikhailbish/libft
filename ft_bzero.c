@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:56:27 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/21 21:31:19 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:00:18 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	int	*m;
+	char	*m;
 
-	m = (int *)s;
+	m = (char *)s;
 	while (n--)
 	{
 		*m = 0;

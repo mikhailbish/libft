@@ -182,8 +182,7 @@ int main (void)
 	int length = 11;
 	bzero(sys_memmove_cache, memmove_cache_size);
 	bzero(ft_memmove_cache, memmove_cache_size);
-	int sp_ft, sp_sys = 4;
-	int ep_ft, ep_sys = 9;
+	int sp_ft = 4;
 	curr = 0;
 	ft_ptr_src = &ft_memmove_cache[sp_ft];
 	sys_ptr_src = &sys_memmove_cache[sp_ft];
@@ -253,7 +252,6 @@ int main (void)
 	char ft_strlcat_cache[15] = "yo";
 	char sys_strlcat_cache[15] = "yo";
 
-	char *ft_catme = "hello world";
 
 	int ft_strlcat_return  = ft_strlcat(ft_strlcat_cache, ft_cpyme, strlcat_cache_length);
 	int sys_strlcat_return = strlcat(sys_strlcat_cache, ft_cpyme, strlcat_cache_length);
@@ -268,6 +266,72 @@ int main (void)
 	}
 	
 	write(1, "strlcat done!\n", 14);
+	/* strncmp */
+	char *ft_strncmp_s1 = "some";
+	char *ft_strncmp_s2 = "someradasdasdsadassdas";
+	size_t ft_strncmp_n = 0;
+	int ft_strncmp_return;
+	int sys_strncmp_return;
+
+	while (ft_strncmp_n != 10)
+	{
+		ft_strncmp_return = ft_strncmp(ft_strncmp_s1, ft_strncmp_s2, ft_strncmp_n);
+		sys_strncmp_return = strncmp(ft_strncmp_s1, ft_strncmp_s2, ft_strncmp_n);
+		ft_strncmp_n++;
+		if (ft_strncmp_return != sys_strncmp_return)
+			write(1, "strncmp error\n", 14);
+	}
+
+	write(1, "strncmp done!\n", 14);
+
+	/* memchr */
+	int is_memchr_c = -512;
+	size_t memchr_n;
+	char *memchr_s = "some sasd string we have";
+//	char *memchr_s = "";
+	while(is_memchr_c != 512)
+	{
+		memchr_n = 0;
+		while(memchr_n < 24)
+		{
+			if (ft_memchr(memchr_s, is_memchr_c, memchr_n) != memchr(memchr_s, is_memchr_c, memchr_n))
+				printf("%s, %s\n", ft_memchr(memchr_s, is_memchr_c, memchr_n), memchr(memchr_s, is_memchr_c, memchr_n));
+			memchr_n++;
+		}
+		is_memchr_c++;
+	}
+	printf("memchr done!\n");
+
+	/*  memcmp */
+	char *memcmp_s1 = "asd";
+	char *memcmp_s2 = "asdf";
+	size_t memcmp_n = ft_strlen(memcmp_s2);
+	int sys_memcmp_return = memcmp(memcmp_s1, memcmp_s2, memcmp_n);
+	int ft_memcmp_return = ft_memcmp(memcmp_s1, memcmp_s2, memcmp_n);
+	if (sys_memcmp_return != ft_memcmp_return)
+		write(1, "memcmp error\n", 13);
+	write(1, "memcmp done!\n", 13);
+	
+	/* strnstr */
+	char *ft_strnstr_needle = "s";
+	char *ft_strnstr_haystack = "asd";
+	size_t ft_strnstr_len = ft_strlen(ft_strnstr_haystack);
+	char *sys_strnstr_return;
+	char *ft_strnstr_return;
+	ft_strnstr_return = ft_strnstr(ft_strnstr_haystack, ft_strnstr_needle, ft_strnstr_len);
+	sys_strnstr_return = strnstr(ft_strnstr_haystack, ft_strnstr_needle, ft_strnstr_len);
+	if (sys_strnstr_return != ft_strnstr_return)
+	{
+		write(1, "strnstr error\n", 15);
+	}
+	write(1, "strnstr done!\n", 14);
+	/* atoi */
+	//do overflow underflow checks
+	char *atoi_a = "12312331231231223123123";
+	if (ft_atoi(atoi_a) != atoi(atoi_a))
+		write(1, "smth wrong\n", 11);
+	write(1, "atoi done!\n",12);
+	/* calloc */
 
 		/*
 	void* k = malloc(sizeof(char) * 10);
@@ -355,6 +419,17 @@ int main (void)
 		printf("%s\n", *words);
 		words++;
 	}*/
+/*
+ 
+ 	s1 = " Hello world "
+	set = " Hd"
+ "ello worl"
+  
+ */
+
+
+
+
 	/*
 	char *s = "  I ";
 	char c = ' ';

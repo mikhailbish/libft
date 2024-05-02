@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 21:56:03 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/26 14:42:53 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:20:41 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		temp++;
 		s++;
 	}
-	temp[length] = 0;
+	*temp = 0;
 	return (result);
 }

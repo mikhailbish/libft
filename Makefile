@@ -1,5 +1,4 @@
 NAME=libft.a
-#.PHONY: all clean
 FUNCTIONS=ft_atoi \
 			ft_bzero \
 			ft_calloc \
@@ -43,7 +42,9 @@ BONUS_FUNCTIONS=ft_lstadd_back_bonus \
 			ft_lstlast_bonus \
 			ft_lstnew_bonus \
 			ft_lstsize_bonus \
+
 all: $(NAME)
+
 # relinking?
 test: preptest test/test.c
 	cc -o test/test  -Wall -Wextra -Werror test/libft.a test/test.c  && ./test/test
@@ -68,7 +69,10 @@ $(O_FILES): $(C_FILES) libft.h
 
 clean:
 	rm $(O_FILES)
-	rm $(NAME)
+
+fclean:
+	rm -f $(NAME)
+
 cleant:
 	rm test/test
 	rm test/libft.a
