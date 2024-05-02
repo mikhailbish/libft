@@ -1,4 +1,5 @@
 test/
 *.o
 *.a
-#*.gch
+*.gch
+*.swp
