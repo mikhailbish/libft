@@ -4,10 +4,10 @@
 
 int main()
 {
-	char *message = "^^^1^^2a,^^^^3^^^^--h^^^^";
+	char *message = "asd";
 	char **words;
 	int counter = 0;
-	words = ft_split(message, '^');
+	words = ft_split(message, 'a');
 	while (*words)
 	{
 		printf("%s\n", *words);

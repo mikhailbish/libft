@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/03 17:42:59 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:14:41 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,21 @@ static int	ft_populate(char **final, const char *s, char c)
 	int	counter;
 
 	counter = 0;
-	length = -1;
 	s = ft_skip_char(s, c);
-	char **ptr = final;
+	length = get_word_length(s, c);
 	while (length)
 	{
-		length = get_word_length(s, c);
-		if (length)
+		final[counter] = ft_substr(s, 0, length);
+		if (!*final)
 		{
-			*final = ft_substr(s, 0, length);
-			if (!*final)
-			{
-				while (counter--)
-					free(ptr[counter]);
-				return (0);
-			}
-			final++;
+			while (counter--)
+				free(final[counter]);
+			return (0);
 		}
 		s += length;
 		s = ft_skip_char(s, c);
 		counter++;
+		length = get_word_length(s, c);
 	}
 	return (counter);
 }
