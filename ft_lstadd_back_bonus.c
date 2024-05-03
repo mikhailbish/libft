@@ -6,11 +6,11 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:39:34 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/28 20:16:31 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:02:52 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "libft.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

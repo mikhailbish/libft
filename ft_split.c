@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/28 20:59:56 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:42:59 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,14 @@ static int	get_word_length(const char *s, char c)
 
 	counter = 0;
 	while (s[counter] && s[counter] != c)
-	{
 		counter++;
-	}
 	return (counter);
 }
 
 static const char	*ft_skip_char(const char *s, char c)
 {
-	while (*s == c)
-	{
+	while (*s == c && *s)
 		s++;
-	}
 	return (s);
 }
 
@@ -59,6 +55,7 @@ static int	ft_populate(char **final, const char *s, char c)
 	counter = 0;
 	length = -1;
 	s = ft_skip_char(s, c);
+	char **ptr = final;
 	while (length)
 	{
 		length = get_word_length(s, c);
@@ -68,7 +65,7 @@ static int	ft_populate(char **final, const char *s, char c)
 			if (!*final)
 			{
 				while (counter--)
-					free(final[counter]);
+					free(ptr[counter]);
 				return (0);
 			}
 			final++;

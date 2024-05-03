@@ -6,11 +6,11 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:41:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/28 20:19:28 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:04:40 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "libft.h"
 
 int	ft_lstsize(t_list *lst)
 {

@@ -4,7 +4,22 @@
 
 int main()
 {
-	int l = ft_strncmp("abcdef", "abc\375xx", 5);
-	int o = strncmp("abcdef", "abc\375xx", 5);
-	printf("%d, %d\n", l, o);
+	char *message = "^^^1^^2a,^^^^3^^^^--h^^^^";
+	char **words;
+	int counter = 0;
+	words = ft_split(message, '^');
+	while (*words)
+	{
+		printf("%s\n", *words);
+		words++;
+		counter++;
+	}
+	words -= counter;
+	while (*words)
+	{
+		free(*words);
+		words++;
+	}
+	words -= counter;
+	free(words);
 }

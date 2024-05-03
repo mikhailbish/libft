@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 15:54:35 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/02 22:10:12 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:06:47 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	counter;
 
 	dst_len = ft_strlen(dst);
-	total_length = dstsize + ft_strlen(src);
+	if (dst_len > dstsize)
+		total_length = dstsize + ft_strlen(src);
+	else
+		total_length = dst_len + ft_strlen(src);
 	dst += dst_len;
 	counter = 0;
-	if (!dstsize)
-		return (total_length);
-	while (counter + dst_len < dstsize - 1 && src[counter])
+	while (counter + dst_len + 1 < dstsize && src[counter])
 	{
 		dst[counter] = src[counter];
 		counter++;
 	}
 	if (dstsize && !(dstsize < dst_len))
 		dst[counter] = 0;
-	return (total_length - (dst_len - counter));
+	return (total_length);
 }

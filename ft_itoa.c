@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:33:14 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/25 20:35:03 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:29:00 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ static void	ft_fill_string(char *result, int n, int length)
 	while (n)
 	{
 		if (n < 0)
-			current = (-1) * n % 10;
+			current = (-1) * (n % 10);
+		else
+			current = n % 10;
 		n = n / 10;
 		length--;
 		result[length] = current + '0';
