@@ -248,24 +248,30 @@ int main (void)
 
 	/* strlcat */
 	
-	int strlcat_cache_length = 15;
-	char ft_strlcat_cache[15] = "yo";
-	char sys_strlcat_cache[15] = "yo";
+	int strlcat_cache_length = 0;
+	char ft_strlcat_cache[50] = "pqaasd";
+	char sys_strlcat_cache[50] = "pqaasd";
+	char *ft_catme = "hel";
+	int ft_strlcat_return; // = ft_strlcat(ft_strlcat_cache, ft_catme, strlcat_cache_length);
+	int sys_strlcat_return;// = strlcat(sys_strlcat_cache, ft_catme, strlcat_cache_length);
 
-
-	int ft_strlcat_return  = ft_strlcat(ft_strlcat_cache, ft_cpyme, strlcat_cache_length);
-	int sys_strlcat_return = strlcat(sys_strlcat_cache, ft_cpyme, strlcat_cache_length);
-	
-	if (memcmp(ft_strlcat_cache, sys_strlcat_cache, strlcat_cache_length) || ft_strlcat_return != sys_strlcat_return)
+	while(strlcat_cache_length < 1)
 	{
-		write(1, "\n", 1);
-		write(1, ft_strlcat_cache, strlcat_cache_length);
-		write(1, "\n", 1);
-		write(1, sys_strlcat_cache, strlcat_cache_length);
-		write(1, "\n", 1);
+		ft_strlcat_return  = ft_strlcat(ft_strlcat_cache, ft_catme, strlcat_cache_length);
+		sys_strlcat_return = strlcat(sys_strlcat_cache, ft_catme, strlcat_cache_length);
+		if (memcmp(ft_strlcat_cache, sys_strlcat_cache, strlcat_cache_length) || ft_strlcat_return != sys_strlcat_return)
+		{
+			printf("ft_cache  : %s\n", ft_strlcat_cache);
+			printf("sys_cache : %s\n", sys_strlcat_cache);
+			printf("ft_return : %d\n", ft_strlcat_return);
+			printf("sys_return: %d\n", sys_strlcat_return);
+			printf("cachelength: %d\n", strlcat_cache_length);
+		}
+		strlcat_cache_length++;
 	}
 	
-	write(1, "strlcat done!\n", 14);
+	
+	printf("strlcat done!\n");
 	/* strncmp */
 	char *ft_strncmp_s1 = "some";
 	char *ft_strncmp_s2 = "someradasdasdsadassdas";
@@ -332,6 +338,8 @@ int main (void)
 		write(1, "smth wrong\n", 11);
 	write(1, "atoi done!\n",12);
 	/* calloc */
+
+
 
 		/*
 	void* k = malloc(sizeof(char) * 10);
