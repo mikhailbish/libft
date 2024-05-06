@@ -6,87 +6,92 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/06 14:12:00 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:34:29 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char const *get_next_del(char const *s, char c)
+static int	get_word_length(const char *s, char c)
 {
-	while(*s != c && *s)
-		s++;
-	if (*s)
-		return (s);
-	return (0);
+	int	counter;
+
+	counter = 0;
+	while (s[counter] && s[counter] != c)
+		counter++;
+	return (counter);
 }
 
-static char const *get_next_word_start(char const *s, char c)
+static const char	*ft_skip_char(const char *s, char c)
 {
-	while(*s && *s == c)
+	while (*s == c && *s)
 		s++;
 	return (s);
 }
 
-static int count_words(char *s, char c)
+static int	count_words(const char *s, char c)
 {
-	char	*nd;
-	char	*nw;
-	int 	count;
-
-	count = 0;
-	nd = s;
-	while (nd)
-	{
-		nw = get_next_word_start(nd, c);
-		nd = get_next_del(nw, c);
-		count++;
-	}
-	if (!count)
-		count++;
-	return (count);
-}
-
-
-static int fill_array(char **result, char const *s, char c)
-{
-	char const	*nd;
-	char const	*nw;
+	int	length;
 	int	counter;
-	
+
 	counter = 0;
-	nd = s;
-	while(nd)
+	length = -1;
+	s = ft_skip_char(s, c);
+	while (length)
 	{
-		nw = get_next_word_start(nd, c);
-		nd = get_next_del(nw, c);
-		if (nd - nw > 0)
-			result[counter] = ft_substr(s, nw - s, nd - nw);
-		else if (ft_strlen(nw)) 
-			result[counter] = ft_substr(s, nw - s, ft_strlen(nw));
-		if (!result[counter] && ft_strlen(nw))
-		{
-			while(counter--)
-				free(result[counter]);
-			free(result);
-			return (0);
-		}
+		length = get_word_length(s, c);
+		s += length;
+		s = ft_skip_char(s, c);
 		counter++;
 	}
-	result[counter] = 0;
 	return (counter);
 }
 
-char **ft_split(char const *s, char c)
+static int	ft_populate(char **final, const char *s, char c)
 {
-	char **result;
-	int count;
+	int	length;
+	int	counter;
 
-	count = count_words((char *)s, c);
-	result = (char **)malloc((count + 1) * sizeof(char *));
-	if (!result)
+	counter = 0;
+	length = -1;
+	s = ft_skip_char(s, c);
+	while (length)
+	{
+		length = get_word_length(s, c);
+		if (length)
+		{
+			*final = ft_substr(s, 0, length);
+			if (!*final)
+			{
+				while (counter--)
+					free(*(final - counter - 1));
+				return (0);
+			}
+			final++;
+		}
+		s += length;
+		s = ft_skip_char(s, c);
+		counter++;
+	}
+	return (counter);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**final;
+	int		counter;
+	int		result;
+
+	counter = count_words(s, c);
+	final = (char **)malloc(sizeof(char *) * counter);
+	if (!final)
 		return (0);
-	if (fill_array(result, s, c))
-		return (result);
-	return (0);
+	final[counter - 1] = 0;
+	result = ft_populate(final, s, c);
+	if (!result)
+	{
+		free(final);
+		return (0);
+	}
+	return (final);
 }
