@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:02:07 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/02 17:21:59 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:03:04 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		{
 			counter = 0;
 			haystack--;
+			len++;
 		}
 		haystack++;
 	}
