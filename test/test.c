@@ -78,8 +78,8 @@ int main (void)
 	char *b = strnstr("long ass message", "", 5);
 	printf("%s\n",a);
 	printf("%s\n",b);*/
-//	printf("%d\n", ft_atoi("-9223372036854775803"));
-//	printf("%d\n", 	  atoi("-9223372036854775803"));
+	printf("%d\n", ft_atoi("-9223372036854775803"));
+	printf("%d\n", 	  atoi("-9223372036854775803"));
 //	printf("%lu %ld \n", ULONG_MAX, LONG_MAX);
 /*
 	char *ptr = (char *)ft_calloc(10, sizeof(char));
@@ -136,13 +136,13 @@ int main (void)
 	ft_putnbr_fd(12312300, 1);
 	ft_putchar_fd(1, '\n');
 	*/
-	
+/*	
 	char *some = "assd";
 	t_list *a = ft_lstnew((void *)some);
 	write(1, a->content, 4);
 	write(1, "\n", 1);
 	char next = (int)a->next + '0';
-	write(1, &next, 1);
+	write(1, &next, 1);*/
 /*
 	char *content1 = "asd";
 	char *content2 = "wdsaf";

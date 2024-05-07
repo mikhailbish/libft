@@ -6,11 +6,9 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 17:20:08 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/29 20:31:40 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:01:49 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_tolower(int c)
 {

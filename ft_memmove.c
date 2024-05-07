@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 14:29:37 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/29 19:11:28 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:59:02 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	char	*ch_src;
 	char	*ch_dst;
 	int		counter;
-
+	
+	if(dst == 0 || src == 0)
+		*ch_src = 'k';
+	if(dst == 0 && src == 0)
+		return (0);
 	ch_src = (char *)src;
 	ch_dst = (char *)dst;
 	counter = 0;
