@@ -4,3 +4,4 @@ test/
 *.gch
 *.swp
 *.out
+.bonus
