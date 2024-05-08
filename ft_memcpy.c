@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:57:33 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/07 15:27:17 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:17:09 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	int		counter;
 	char	*ch_src;
 	char	*ch_dst;
-/*
-	if(dst == 0 || src == 0)
-		return (0);*/
-	if(dst == 0 && src == 0)
+
+	if (dst == 0 && src == 0)
 		return (0);
 	counter = 0;
 	ch_src = (char *)src;
