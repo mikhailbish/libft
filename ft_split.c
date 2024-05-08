@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:29:32 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/06 15:34:29 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:24:20 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**ft_split(char const *s, char c)
 	int		result;
 
 	counter = count_words(s, c);
-	final = (char **)malloc(sizeof(char *) * counter);
+	final = (char **)malloc(sizeof(char *) * (counter));
 	if (!final)
 		return (0);
 	final[counter - 1] = 0;

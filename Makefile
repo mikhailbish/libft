@@ -85,6 +85,7 @@ $(O_FILES): $(C_FILES) libft.h
 
 clean:
 	rm -f $(O_FILES)
+	rm -f libft.h.gch
 
 fclean: clean
 	rm -f $(NAME)
