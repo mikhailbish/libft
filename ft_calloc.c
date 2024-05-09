@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:20:30 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/08 21:29:16 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:50:56 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
-	size_t	l;
+	size_t	max;
+	size_t	res;
 
-	l = 0;
-	l--;
-	l /= size;
-	printf("%lu\n", size);
-	if (l < count)
+	res = count * size;
+	if (!res)
 		return (0);
-	size_t res = count * size;
+	max = 0;
+	max--;
+	if (size && max/count < size)
+		return (0);
 	ptr = malloc(res);
 	if (!ptr)
 		return (0);
-	ft_bzero(ptr, count * size);
+	ft_bzero(ptr, res);
 	return (ptr);
 }
