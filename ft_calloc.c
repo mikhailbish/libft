@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:20:30 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/09 20:50:56 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:58:41 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	res;
 
 	res = count * size;
-	if (!res)
-		return (0);
 	max = 0;
 	max--;
-	if (size && max/count < size)
+	if (count && (max / count) < size)
 		return (0);
 	ptr = malloc(res);
 	if (!ptr)

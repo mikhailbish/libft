@@ -2,6 +2,10 @@ NAME=libft.a
 
 .PHONY: all bonus re clean fclean
 
+CC=cc
+
+CFLAGS=-Wall -Wextra -Werror
+
 FUNCTIONS=ft_atoi \
 			ft_bzero \
 			ft_calloc \
@@ -49,18 +53,6 @@ BONUS_FUNCTIONS=ft_lstadd_back_bonus \
 
 all: $(NAME)
 
-# relinking?
-test: preptest test/test.c
-	cc -o test/test  -Wall -Wextra -Werror test/libft.a test/test.c  && ./test/test
-
-preptest: test/libft.a test/libft.h
-
-test/libft.a: bonus
-	cp libft.a test/
-
-test/libft.h: libft.h
-	cp libft.h test/
-
 C_FILES=$(foreach func, $(FUNCTIONS), $(func).c)
 O_FILES=$(foreach func, $(FUNCTIONS), $(func).o)
 BONUS_C_FILES=$(foreach func, $(BONUS_FUNCTIONS), $(func).c)
@@ -77,11 +69,8 @@ bonus: .bonus
 
 re: fclean all
 
-$(BONUS_O_FILES): $(BONUS_C_FILES)
-	cc -c $^
-
-$(O_FILES): $(C_FILES) libft.h
-	cc -c $^
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	rm -f $(O_FILES)
@@ -91,8 +80,3 @@ fclean: clean
 	rm -f $(NAME)
 	rm -f .bonus
 	rm -f $(BONUS_O_FILES)
-
-cleant:
-	rm test/test
-	rm test/libft.a
-	rm test/libft.h
