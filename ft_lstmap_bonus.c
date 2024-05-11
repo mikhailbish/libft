@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:42:54 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/07 13:43:11 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:57:59 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	new_list_start = 0;
 	tmp_node = 0;
 	new_content = 0;
+	if (!f || !del)
+		return (0);
 	while (lst)
 	{
 		new_content = f(lst->content);
