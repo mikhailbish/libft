@@ -6,9 +6,10 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:49:10 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/08 21:29:25 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:49:18 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*
 #include "libft.h"
 
 static char	*skip_spaces(char *str)
@@ -94,4 +95,4 @@ int	ft_atoi(const char *str)
 	if (of_result == 0 || of_result == -1)
 		return (of_result);
 	return (calc_num(str, sign));
-}
+}*/
