@@ -1,26 +1,42 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 19:31:30 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/04/23 17:47:11 by mbutuzov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <libft.h>
 
-#include "libft.h"
-
-void	*ft_memset(void *b, int c, size_t len)
+void put_ul(size_t len, void *ptr, unsigned long long num)
 {
-	unsigned char	*res_ptr;
+	unsigned long long *chunk;
 
-	res_ptr = (unsigned char *)b;
-	while (len--)
+	chunk = (unsigned long long *)ptr;
+	while(len > sizeof(unsigned long long))
 	{
-		*res_ptr = (unsigned char)c;
-		res_ptr++;
+		*chunk = num;
+		chunk++;
+		len -= sizeof(unsigned long long);
 	}
-	return (b);
+}
+
+void	*ft_memset(void *mem, int c, size_t len)
+{
+	char *str;
+	unsigned long long *chunk;
+	unsigned long long tmp;
+	int chunk_size;
+
+	tmp = 0;
+	chunk = (unsigned long long *)mem;
+	chunk_size = (int)sizeof(unsigned long long);
+	while (chunk_size > 0)
+	{
+		tmp += (unsigned long long)(unsigned char)c;
+		if (chunk_size > 1)
+			tmp = tmp << 8;
+		chunk_size--; 
+	}
+	if (len >= sizeof(unsigned long long))
+		put_ul(len, mem, tmp);
+	str = (unsigned char *)chunk;
+	while(len--)
+	{
+		*str = (unsigned char)c;
+		str++;
+	}
+	return (mem);
 }

@@ -35,7 +35,7 @@ static int	ft_overflow_handler(const char *num_str, int sign)
 {
 	char	*max_long;
 	char	*min_long;
-	int		max_length;
+
 	int		comparison_result;
 	int		n_length;
 
@@ -44,7 +44,7 @@ static int	ft_overflow_handler(const char *num_str, int sign)
 	n_length = ft_numlen(num_str);
 	max_long = "9223372036854775807";
 	min_long = "9223372036854775808";
-	max_length = ft_strlen(max_long);
+
 	comparison_result = -1;
 	if (ft_numlen(num_str) == ft_numlen(max_long) && sign == 1)
 		comparison_result = ft_strncmp(num_str, max_long, n_length);
