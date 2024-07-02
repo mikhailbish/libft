@@ -20,7 +20,7 @@ int	ft_atoi(const char *str)
 		if (num > old)
 		{
 			if (sign < 0)
-				return (0);
+				return (-1);
 		}
 		str++;
 	}
@@ -29,7 +29,7 @@ int	ft_atoi(const char *str)
 		old = num;
 		num = -num;
 		if (old == num )
-			return (-1);
+			return (0);
 	}
 	return ((int)num);
 }
@@ -37,8 +37,25 @@ int	ft_atoi(const char *str)
 #include <stdio.h>
 int main(void)
 {
-	char numnum[] = ""
-	int k = ft_atoi("1223");
-	int z = atoi("1223");
-	printf("%d\n%d\n", k,z);
+	char numnum[] = "0000000000";
+	int i = 0;
+	int k = 0;
+	int z = 0;
+	printf("asd%d %d\n", k, z);
+	char *somnum  = (char *)numnum;
+	while(*somnum)
+	{
+		i = 0;
+		while (i < 10)
+		{
+			*somnum = (char)i + '0';
+			k = ft_atoi(somnum);
+			z = atoi(somnum);
+			if (k!=z)
+				printf("%d %d\n", k, z);
+			i++;
+		}
+		somnum++;
+	}
+	printf("done\n");
 }
