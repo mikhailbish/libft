@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:56:27 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/05/10 17:57:24 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:44:49 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*m;
-
-	m = (char *)s;
-	while (n)
-	{
-		*(m++) = 0;
-		n--;
-	}
+	ft_memset(s, 0, n);
 }
