@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:17:57 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/07/02 19:48:53 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:42:28 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memset(void *mem, int c, size_t len)
 {
 	unsigned long long	*chunk;
 	unsigned long long	tmp;
-	char				*str;
+	unsigned char		*str;
 	int					chunk_size;
 
 	tmp = 0;
