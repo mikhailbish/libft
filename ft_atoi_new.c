@@ -1,61 +1,80 @@
 #include "libft.h"
 #include <stdlib.h>
-int	ft_atoi(const char *str)
+int ft_getnum(const char *str, long long sign)
 {
-//check spaces
-//check signs
-//check dig
-	long num;
-	long old;
-	long sign;
-	
+	long long num;
+	long long old;
+
 	num = 0;
-	sign  = 1;
-	while(ft_isdigit(*str))
+	while (ft_isdigit(*str))
 	{
 		old = num;
-		num -= (long)((*str) - '0');
+		num -= (long long)((*str) - '0');
 		if (ft_isdigit(*(str + 1)))
 			num *= 10;
-		if (num > old)
-		{
-			if (sign < 0)
-				return (-1);
-		}
+		if (num > old && sign < 0)
+			return (-1);
 		str++;
 	}
 	if (sign > 0)
 	{
 		old = num;
 		num = -num;
-		if (old == num )
+		if (old == num)
 			return (0);
 	}
 	return ((int)num);
 }
-
-#include <stdio.h>
-int main(void)
+int	ft_atoi(const char *str)
 {
-	char numnum[] = "0000000000";
-	int i = 0;
-	int k = 0;
-	int z = 0;
-	printf("asd%d %d\n", k, z);
-	char *somnum  = (char *)numnum;
-	while(*somnum)
+	long long num;
+	long long old;
+	long long sign;
+	
+	sign  = 1;
+	while (*str == '\f' || *str == '\n' || *str == '\r' || *str == '\t' || *str == '\v' || *str == ' ')
 	{
-		i = 0;
-		while (i < 10)
-		{
-			*somnum = (char)i + '0';
-			k = ft_atoi(somnum);
-			z = atoi(somnum);
-			if (k!=z)
-				printf("%d %d\n", k, z);
-			i++;
-		}
-		somnum++;
+		str++;
 	}
-	printf("done\n");
+	if (*str == '-')
+	{
+		sign = -sign;
+		str++;
+	} else if (*str == '+')
+		str++;
+	return (ft_getnum(str, sign));
+}
+#include <stdio.h>
+int main()
+{
+	printf("\n====================================================\n");
+	printf("Test ft_atoi\n");
+	printf("====================================================\n");
+	printf("%d\n", atoi("18446744073709551616"));
+	printf("%d\n", ft_atoi("18446744073709551616"));
+	printf("=======================================\n");
+	printf("%d\n", atoi("1234"));
+	printf("%d\n", ft_atoi("1234"));
+	printf("=======================================\n");
+	printf("%d\n", atoi("-1234"));
+	printf("%d\n", ft_atoi("-1234"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("12345678901234567890"));
+    printf("%d\n", ft_atoi("12345678901234567890"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("1123456789012345678900000000000"));
+    printf("%d\n", ft_atoi("1123456789012345678900000000000"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("-12345678901234567890"));
+    printf("%d\n", ft_atoi("-12345678901234567890"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("-1123456789012345678900000000000"));
+    printf("%d\n", ft_atoi("-1123456789012345678900000000000"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("2345678901234567890"));
+    printf("%d\n", ft_atoi("2345678901234567890"));
+    printf("=======================================\n");
+    printf("%d\n", atoi("123456789009876543211234567890"));
+    printf("%d\n", ft_atoi("123456789009876543211234567890"));
+	return (0);
 }
