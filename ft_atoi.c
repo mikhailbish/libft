@@ -22,8 +22,6 @@ static int ft_getnum(const char *str, long long sign)
 
 int	ft_atoi(const char *str)
 {
-	long long num;
-	long long old;
 	long long sign;
 	
 	sign  = 1;
