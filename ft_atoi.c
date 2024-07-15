@@ -1,9 +1,10 @@
 #include "libft.h"
 
-static int ft_getnum(const char *str, long long sign)
+static int	ft_getnum(const char *str, long long sign)
 {
-	long long num;
-	long long tmp;
+	long long	num;
+	long long	tmp;
+
 	num = 0;
 	while (ft_isdigit(*str))
 	{
@@ -22,10 +23,11 @@ static int ft_getnum(const char *str, long long sign)
 
 int	ft_atoi(const char *str)
 {
-	long long sign;
-	
-	sign  = 1;
-	while (*str == '\f' || *str == '\n' || *str == '\r' || *str == '\t' || *str == '\v' || *str == ' ')
+	long long	sign;
+
+	sign = 1;
+	while (*str == '\f' || *str == '\n' || *str == '\r'
+		|| *str == '\t' || *str == '\v' || *str == ' ')
 	{
 		str++;
 	}
@@ -33,7 +35,8 @@ int	ft_atoi(const char *str)
 	{
 		sign = -sign;
 		str++;
-	} else if (*str == '+')
+	}
+	else if (*str == '+')
 		str++;
 	return (ft_getnum(str, sign));
 }
