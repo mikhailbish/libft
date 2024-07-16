@@ -12,17 +12,18 @@
 
 #include "libft.h"
 
-void	put_ul(size_t len, void *ptr, unsigned long long num)
+void	*put_ul(size_t len, void *ptr, unsigned long long num)
 {
 	unsigned long long	*chunk;
 
 	chunk = (unsigned long long *)ptr;
-	while (len > sizeof(unsigned long long))
+	while (len >= sizeof(unsigned long long))
 	{
 		*chunk = num;
 		chunk++;
 		len -= sizeof(unsigned long long);
 	}
+	return ((void *)chunk);
 }
 
 void	*ft_memset(void *mem, int c, size_t len)
@@ -42,13 +43,14 @@ void	*ft_memset(void *mem, int c, size_t len)
 			tmp = tmp << 8;
 		chunk_size--;
 	}
-	if (len >= sizeof(unsigned long long))
-		put_ul(len, mem, tmp);
+/*	if (len >= sizeof(unsigned long long))
+//		chunk = (unsigned long long *)put_ul(len, mem, tmp);
+	len = len - ((void *)chunk - mem);
 	str = (unsigned char *)chunk;
 	while (len--)
 	{
 		*str = (unsigned char)c;
 		str++;
-	}
+	}*/
 	return (mem);
 }
