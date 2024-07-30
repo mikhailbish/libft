@@ -40,6 +40,7 @@ FUNCTIONS=ft_atoi \
 			ft_substr \
 			ft_tolower \
 			ft_toupper \
+			get_next_line \
 
 BONUS_FUNCTIONS=ft_lstadd_back_bonus \
 			ft_lstadd_front_bonus \
