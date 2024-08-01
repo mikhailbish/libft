@@ -41,6 +41,9 @@ FUNCTIONS=ft_atoi \
 			ft_tolower \
 			ft_toupper \
 			get_next_line \
+			ft_printf \
+			ft_ptr_handler \
+			ft_putnumber_base \
 
 BONUS_FUNCTIONS=ft_lstadd_back_bonus \
 			ft_lstadd_front_bonus \
