@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:59:48 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/06 22:28:26 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:44:08 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@ long	ft_ctol_base(char digit, int base)
 		return (num);
 	return (-1);
 }
-#include <limits.h>
+/*
+static maybe_update_end_ptr(size_t)
+{
+
+}
+*/
+
+// TODO: update endptr on  overflow
+// TODO: test 
+// TODO: debug
+// TODO: norm
 static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 {
 	long long	num;
@@ -55,8 +65,12 @@ static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 		str++;
 		digits++;
 	}
+	write(1, "updated\n", 8);
+	
 	if (digits && endptr)
+	{
 		*endptr = (char *)str;
+	}
 	return ((long)num);
 }
 /*
@@ -120,27 +134,28 @@ long ft_strtol(const char *nptr, char **endptr, int base)
 	long long	sign;
 	char		*str;
 
-	str = (char *)nptr;
+	if (endptr)
+		*endptr = (char *)nptr;
 	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-')
 	{
 		sign = -sign;
-		str++;
+		nptr++;
 	}
-	else if (*str == '+')
-		str++;
-	if (!base && *str == '0' && (*(str + 1) == 'x' || (*str + 1) == 'X'))
+	else if (*nptr == '+')
+		nptr++;
+	if (!base && *nptr == '0' && (*(nptr + 1) == 'x' || (*nptr + 1) == 'X'))
 	{
 		base = 16;
-		str += 2;
+		nptr += 2;
 	}
-	else if (!base && *str == '0')
+	else if (!base && *nptr == '0')
 		base = 8;
 	else if (!base)
 		base = 10;
-	return (ft_getnum(str, sign, base, endptr));
+	return (ft_getnum(nptr, sign, base, endptr));
 }
 
 #include <stdio.h>
@@ -162,9 +177,11 @@ int main()
 */
 	char *my_endptr;
 	char *sys_endptr;
-	char *num = " -";
+	char *num = "9223372036854775808";
 	long my_long;
 	long sys_long;
+//	sys_long = strtol(num, &sys_endptr, 0);
+//	my_long = ft_strtol(num, &my_endptr, 0);
 //	sys_long = strtol(num, &sys_endptr, 0);
 //	my_long = ft_strtol(num, &my_endptr, 0);
 	sys_long = strtol(num, &sys_endptr, 0);
