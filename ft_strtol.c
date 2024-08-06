@@ -6,32 +6,60 @@
 /*   By: mbutuzov <mbutuzov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:59:48 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/06 20:47:01 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:28:26 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-static int	ft_getnum(const char *str, long long sign)
+long	ft_ctol_base(char digit, int base)
+{
+	long	num;
+
+	if (!(ft_isdigit(digit) || ft_isupper(digit) || ft_islower(digit)))
+		return (-1);
+	num = (long)(digit - '0');
+	if (base < 11)
+	{
+		if (num < (long)base)
+			return (num);
+		else
+			return (-1);
+	}
+	if (ft_isupper(digit))
+		num = (long)(digit - 'A' + 10);
+	if (ft_islower(digit))
+		num = (long)(digit - 'a' + 10);
+	if (num < (long)base)
+		return (num);
+	return (-1);
+}
+#include <limits.h>
+static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 {
 	long long	num;
 	long long	tmp;
+	size_t digits;
 
+	digits = 0;
 	num = 0;
-	while (ft_isdigit(*str))
+	while (ft_ctol_base(*str, base) != -1)
 	{
 		tmp = num;
-		num += (long long)(((*str) - '0') * sign);
-		if (ft_isdigit(*(str + 1)))
-			num *= 10;
+		num += (long long)(ft_ctol_base(*str, base) * sign);
+		if (ft_ctol_base(*(str + 1), base) != -1)
+			num *= base;
 		if (sign > 0 && num < tmp)
-			return (-1);
+			return (LONG_MAX);
 		if (sign < 0 && num > tmp)
-			return (0);
+			return (LONG_MIN);
 		str++;
+		digits++;
 	}
-	return ((int)num);
+	if (digits && endptr)
+		*endptr = (char *)str;
+	return ((long)num);
 }
+/*
 int	ft_atoi(const char *str)
 {
 	long long	sign;
@@ -47,7 +75,8 @@ int	ft_atoi(const char *str)
 	else if (*str == '+')
 		str++;
 	return (ft_getnum(str, sign));
-}*/
+}
+*/
 /*
 int	legal_char_base(char digit, int base)
 {
@@ -85,42 +114,39 @@ long	ctol(char digit, int base)
 		return (-1);
 	return (digit - 'A' + 11);
 }*/
-long	ft_ctol_base(char digit, int base)
-{
-	long	num;
 
-	if (!(ft_isdigit(digit) || ft_isupper(digit) || ft_islower(digit)))
-		return (-1);
-	num = (long)(digit - '0');
-	if (base < 11)
-	{
-		if (num < (long)base)
-			return (num);
-		else
-			return (-1);
-	}
-	if (ft_isupper(digit))
-		num = (long)(digit - 'A' + 10);
-	if (ft_islower(digit))
-		num = (long)(digit - 'a' + 10);
-	if (num < (long)base)
-		return (num);
-	return (-1);
-}
-/*
 long ft_strtol(const char *nptr, char **endptr, int base)
 {
-	const char	tmp;
+	long long	sign;
+	char		*str;
 
-	tmp = nptr;
-	if (endptr != 0)
-		*endptr = (char *)nptr;
+	str = (char *)nptr;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
+	{
+		sign = -sign;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	if (!base && *str == '0' && (*(str + 1) == 'x' || (*str + 1) == 'X'))
+	{
+		base = 16;
+		str += 2;
+	}
+	else if (!base && *str == '0')
+		base = 8;
+	else if (!base)
+		base = 10;
+	return (ft_getnum(str, sign, base, endptr));
 }
 
 #include <stdio.h>
 int main()
 {
-
+/*
 	int max_legal_char;
 	int base = 16;
 	if (base < 11)
@@ -133,5 +159,20 @@ int main()
 	long val = ft_ctol_base('3', 36);
 	long num = strtol("0xFFF", 0, 0);
 	printf("%li\n", num);
+*/
+	char *my_endptr;
+	char *sys_endptr;
+	char *num = " -";
+	long my_long;
+	long sys_long;
+//	sys_long = strtol(num, &sys_endptr, 0);
+//	my_long = ft_strtol(num, &my_endptr, 0);
+	sys_long = strtol(num, &sys_endptr, 0);
+	my_long = ft_strtol(num, &my_endptr, 0);
+	printf("my long: %li\n", my_long);
+	printf("syslong: %li\n", sys_long);
+	printf("start ptr: %p\n", num);
+	printf("my ptr:%p\n", my_endptr);
+	printf("sysptr:%p\n", sys_endptr);
 	return (0);
-}*/
+}
