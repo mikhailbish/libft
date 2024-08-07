@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:59:48 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/06 22:44:08 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:25:43 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,33 @@ long	ft_ctol_base(char digit, int base)
 		return (num);
 	return (-1);
 }
-/*
-static maybe_update_end_ptr(size_t)
-{
 
+static char *resolve_endptr(int prefix, int digits, char *start, char *curr)
+{
+	if (prefix && !digits)
+		return (start + 1);
+	if (!digits)
+		return (start);
+	return (curr);
 }
-*/
+
 static void set_endptr(char **endptr, char *start, int base)
 {
 	char	*temp;
 	int	digits;
 	int	prefix;
-	
+
 	if (!endptr)
 		return ;
 	temp = start;
+	digits = 0;
+	prefix = 0;
+	while (ft_isspace(*temp))
+		temp++;
+	if (*temp == '-')
+		temp++;
+	else if (*temp == '+')
+		temp++;
 	if ((!base || base == 16) && *temp == '0' &&
 		(*(temp + 1) == 'x' || *(temp + 1) == 'X'))
 	{
@@ -59,10 +71,7 @@ static void set_endptr(char **endptr, char *start, int base)
 		digits++;
 		temp++;
 	}
-	if (prefix && !digits)
-		*endptr = start + 1;
-	else
-		*endptr = temp;
+	*endptr = resolve_endptr(prefix, digits, start, temp);
 }
 
 // TODO: update endptr on  overflow and when there are some spaces and signs at the start
@@ -76,18 +85,16 @@ static void set_endptr(char **endptr, char *start, int base)
 	if char is outside base - update endptr
 	if overflow, don't stop updating endptr
 */
-static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
+static long	ft_getnum(const char *str, long sign, int base, char **endptr)
 {
-	long long	num;
-	long long	tmp;
-	size_t		digits;
+	long	num;
+	long	tmp;
 
-	digits = 0;
 	num = 0;
 	while (ft_ctol_base(*str, base) != -1)
 	{
 		tmp = num;
-		num += (long long)(ft_ctol_base(*str, base) * sign);
+		num += (long)(ft_ctol_base(*str, base) * sign);
 		if (ft_ctol_base(*(str + 1), base) != -1)
 			num *= base;
 		if (sign > 0 && num < tmp)
@@ -95,12 +102,7 @@ static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 		if (sign < 0 && num > tmp)
 			return (LONG_MIN);
 		str++;
-		digits++;
 	}
-/*	if (digits && endptr)
-	{
-		*endptr = (char *)str;
-	}*/
 	return ((long)num);
 }
 
@@ -150,21 +152,71 @@ int main()
 	long num = strtol("0xFFF", 0, 0);
 	printf("%li\n", num);
 */
+	int i = 0;
+	char *some[] = {
+		"12312",
+		"-123123",
+		"-",
+		"-0x123321",
+		"-0x123321",
+		"9223372036854775899",
+		"922337203685477589",
+		"-9223372036854775899",
+		"-922337203685477589",
+		"--9223372036854775899",
+		"--922337203685477589",
+		"92233720FFFFFFFFFF",
+		"ZXCVBNMawdasd",
+		"0xZXCVBNMawdasd",
+		"0xZXCVBNMa12wdasd",
+		"\0"
+	};
+	
 	char *my_endptr;
 	char *sys_endptr;
-	char *num = "-0x9223372036854775808";
+	char *num = "-1";
 	long my_long;
 	long sys_long;
+	int base;
 //	sys_long = strtol(num, &sys_endptr, 0);
 //	my_long = ft_strtol(num, &my_endptr, 0);
 //	sys_long = strtol(num, &sys_endptr, 0);
 //	my_long = ft_strtol(num, &my_endptr, 0);
-	sys_long = strtol(num, &sys_endptr, 0);
-	my_long = ft_strtol(num, &my_endptr, 0);
-	printf("my long: %li\n", my_long);
-	printf("syslong: %li\n", sys_long);
-	printf("start ptr: %p\n", num);
-	printf("my ptr:%p\n", my_endptr);
-	printf("sysptr:%p\n", sys_endptr);
+	while (*some[i])
+	{
+		base = 0;
+		sys_long = strtol(some[i], &sys_endptr, base);
+		my_long = ft_strtol(some[i], &my_endptr, base);
+		if ((my_long != sys_long) || (my_endptr != sys_endptr))
+		{
+			printf("string: %s\n", some[i]);
+			printf("base:%d\n", base);
+			printf("my long: %li\n", my_long);
+			printf("syslong: %li\n", sys_long);
+			printf("start ptr: %p\n", num);
+			printf("my ptr:%p\n", my_endptr);
+			printf("sysptr:%p\n", sys_endptr);
+			write(1, "\n", 1);
+		}
+		base = 2;
+		while (base < 37)
+		{
+			sys_long = strtol(some[i], &sys_endptr, base);
+			my_long = ft_strtol(some[i], &my_endptr, base);
+			if ((my_long != sys_long) || (my_endptr != sys_endptr))
+			{
+				printf("string: %s\n", some[i]);
+				printf("base:%d\n", base);
+				printf("my long: %li\n", my_long);
+				printf("syslong: %li\n", sys_long);
+				printf("start ptr: %p\n", num);
+				printf("my ptr:%p\n", my_endptr);
+				printf("sysptr:%p\n", sys_endptr);
+				write(1, "\n", 1);
+			}
+			base++;
+		}
+		i++;
+	}
 	return (0);
 }
