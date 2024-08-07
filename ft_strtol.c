@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:59:48 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/07 20:10:58 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/08/07 20:49:17 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static void	set_endptr(char **endptr, char *start, int base)
 		temp++;
 	if (*temp == '-' || *temp == '+')
 		temp++;
-	else if (*temp == '+')
-		temp++;
 	if ((!base || base == 16) && *temp == '0'
 		&& (*(temp + 1) == 'x' || *(temp + 1) == 'X'))
 	{
@@ -86,7 +84,7 @@ static long	ft_getnum(const char *str, long sign, int base)
 	while (ft_ctol_base(*str, base) != -1)
 	{
 		tmp = num;
-		change = (long)(ft_ctol_base(*str, base) * sign);
+		change = ft_ctol_base(*str, base) * sign;
 		num += change;
 		if ((sign > 0) && ((LONG_MAX - change) < (num - change)))
 			return (LONG_MAX);
@@ -102,7 +100,7 @@ static long	ft_getnum(const char *str, long sign, int base)
 		}
 		str++;
 	}
-	return ((long)num);
+	return (num);
 }
 
 /*
@@ -110,21 +108,19 @@ static long	ft_getnum(const char *str, long sign, int base)
 */
 long	ft_strtol(const char *nptr, char **endptr, int base)
 {
-	long long	sign;
-	char		*tmp;
+	long	sign;
+	char	*tmp;
 
 	tmp = (char *)nptr;
 	sign = 1;
 	while (ft_isspace(*nptr))
 		nptr++;
 	if (*nptr == '-')
-	{
 		sign = -sign;
+	if (*nptr == '-' || *nptr == '+')
 		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	if ((!base || base == 16) && *nptr == '0' && (*(nptr + 1) == 'x' || *(nptr + 1) == 'X'))
+	if (((!base || base == 16) && (*nptr == '0'))
+		&& (*(nptr + 1) == 'x' || *(nptr + 1) == 'X'))
 	{
 		base = 16;
 		nptr += 2;

@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:25:34 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/06 22:33:30 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2024/08/07 20:48:23 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		ft_putstr(char *s);
 int		ft_isspace(int c);
 int		ft_isupper(int c);
 int		ft_islower(int c);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 
 #endif
