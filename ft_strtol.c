@@ -39,16 +39,48 @@ static maybe_update_end_ptr(size_t)
 
 }
 */
+static void set_endptr(char **endptr, char *start, int base)
+{
+	char	*temp;
+	int	digits;
+	int	prefix;
+	
+	if (!endptr)
+		return ;
+	temp = start;
+	if ((!base || base == 16) && *temp == '0' &&
+		(*(temp + 1) == 'x' || *(temp + 1) == 'X'))
+	{
+		prefix++;
+		temp += 2;
+	}
+	while (ft_ctol_base(*temp, base) != -1)
+	{
+		digits++;
+		temp++;
+	}
+	if (prefix && !digits)
+		*endptr = start + 1;
+	else
+		*endptr = temp;
+}
 
-// TODO: update endptr on  overflow
+// TODO: update endptr on  overflow and when there are some spaces and signs at the start
+// TODO: check base
 // TODO: test 
 // TODO: debug
 // TODO: norm
+// TODO: norm
+/*
+	test res:
+	if char is outside base - update endptr
+	if overflow, don't stop updating endptr
+*/
 static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 {
 	long long	num;
 	long long	tmp;
-	size_t digits;
+	size_t		digits;
 
 	digits = 0;
 	num = 0;
@@ -65,77 +97,19 @@ static long	ft_getnum(const char *str, long long sign, int base, char **endptr)
 		str++;
 		digits++;
 	}
-	write(1, "updated\n", 8);
-	
-	if (digits && endptr)
+/*	if (digits && endptr)
 	{
 		*endptr = (char *)str;
-	}
+	}*/
 	return ((long)num);
 }
-/*
-int	ft_atoi(const char *str)
-{
-	long long	sign;
-
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
-	{
-		sign = -sign;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	return (ft_getnum(str, sign));
-}
-*/
-/*
-int	legal_char_base(char digit, int base)
-{
-	int max_legal_char;
-
-	max_legal_char = '0' + base - 1;
-	if (base < 11)
-	{
-		if (!ft_isdigit(digit) || (digit > max_legal_char))
-			return (0);
-		else
-			return (1);
-	}
-	max_legal_char = 'A' + base - 11;
-	if (!(ft_isdigit(digit) || ft_isupper(digit)) || digit > max_legal_char)
-		return (0);
-	return (1);
-}
-*/
-/*
-long	ctol(char digit, int base)
-{
-	int max_legal_char;
-
-	max_legal_char = '0' + base - 1;
-	if (base < 11)
-	{
-		if (!ft_isdigit(digit) || (digit > max_legal_char))
-			return (-1);
-		else
-			return (digit - '0');
-	}
-	max_legal_char = 'A' + base - 11;
-	if (!(ft_isdigit(digit) || ft_isupper(digit)) || digit > max_legal_char)
-		return (-1);
-	return (digit - 'A' + 11);
-}*/
 
 long ft_strtol(const char *nptr, char **endptr, int base)
 {
 	long long	sign;
-	char		*str;
+	char		*tmp;
 
-	if (endptr)
-		*endptr = (char *)nptr;
+	tmp = (char *)nptr;
 	sign = 1;
 	while (ft_isspace(*nptr))
 		nptr++;
@@ -146,7 +120,7 @@ long ft_strtol(const char *nptr, char **endptr, int base)
 	}
 	else if (*nptr == '+')
 		nptr++;
-	if (!base && *nptr == '0' && (*(nptr + 1) == 'x' || (*nptr + 1) == 'X'))
+	if ((!base || base == 16) && *nptr == '0' && (*(nptr + 1) == 'x' || *(nptr + 1) == 'X'))
 	{
 		base = 16;
 		nptr += 2;
@@ -155,6 +129,7 @@ long ft_strtol(const char *nptr, char **endptr, int base)
 		base = 8;
 	else if (!base)
 		base = 10;
+	set_endptr(endptr, tmp, base);
 	return (ft_getnum(nptr, sign, base, endptr));
 }
 
@@ -177,7 +152,7 @@ int main()
 */
 	char *my_endptr;
 	char *sys_endptr;
-	char *num = "9223372036854775808";
+	char *num = "-0x9223372036854775808";
 	long my_long;
 	long sys_long;
 //	sys_long = strtol(num, &sys_endptr, 0);
