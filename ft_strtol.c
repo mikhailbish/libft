@@ -77,13 +77,11 @@ static void	set_endptr(char **endptr, char *start, int base)
 static long	ft_getnum(const char *str, long sign, int base)
 {
 	long	num;
-	long	tmp;
 	long	change;
 
 	num = 0;
 	while (ft_ctol_base(*str, base) != -1)
 	{
-		tmp = num;
 		change = ft_ctol_base(*str, base) * sign;
 		num += change;
 		if ((sign > 0) && ((LONG_MAX - change) < (num - change)))
