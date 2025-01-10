@@ -48,6 +48,8 @@ FUNCTIONS=ft_atoi \
 			ft_isupper \
 			ft_islower \
 			ft_strtol \
+			ft_split_join \
+			ft_va_strjoin \
 
 BONUS_FUNCTIONS=ft_lstadd_back_bonus \
 			ft_lstadd_front_bonus \

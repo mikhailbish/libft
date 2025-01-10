@@ -85,5 +85,9 @@ int		ft_isspace(int c);
 int		ft_isupper(int c);
 int		ft_islower(int c);
 long	ft_strtol(const char *nptr, char **endptr, int base);
+int	ft_count_split(char **texts);
+char	*ft_split_join(char **tab, char *sep);
+char	*va_str_join(size_t num, ...);
+char	*va_str_join_sep(size_t num, char *sep, ...);
 
 #endif
