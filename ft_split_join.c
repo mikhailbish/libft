@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_join.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 18:21:13 by mbutuzov          #+#    #+#             */
+/*   Updated: 2025/01/21 18:22:35 by mbutuzov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	count_tab_chars(char **tab)
@@ -27,10 +39,10 @@ int	ft_count_split(char **texts)
 	return (i);
 }
 
-int write_word(char *text, char *word, size_t char_length)
+int	write_word(char *text, char *word, size_t char_length)
 {
-	int length;
-	size_t word_length;
+	int		length;
+	size_t	word_length;
 
 	word_length = ft_strlen(word);
 	length = word_length;
@@ -38,7 +50,6 @@ int write_word(char *text, char *word, size_t char_length)
 		return (0);
 	while (word_length--)
 		text[--char_length] = word[word_length];
-	
 	return (length);
 }
 
@@ -55,27 +66,15 @@ char	*ft_split_join(char **tab, char *sep)
 	if (sep)
 		word_length += ft_strlen(sep);
 	char_length = count_tab_chars(tab) + word_length * (tab_length - 1);
-//	write(1, "here\n", 5);
 	text = ft_calloc(char_length + 1, sizeof (char));
 	if (!text)
 		return (0);
 	while (tab_length--)
 	{
 		word = tab[tab_length];
-/*
-		word_length = ft_strlen(word);
-		while (word_length--)
-			text[--char_length] = word[word_length];
-*/
 		char_length -= write_word(text, word, char_length);
 		if (sep && tab_length)
 		{
-/*
-			word = sep;
-			word_length = ft_strlen(word);
-			while (word_length--)
-				text[--char_length] = word[word_length];
-*/
 			char_length -= write_word(text, sep, char_length);
 		}
 	}

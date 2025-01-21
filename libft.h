@@ -6,7 +6,7 @@
 /*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:25:34 by mbutuzov          #+#    #+#             */
-/*   Updated: 2024/08/07 20:48:23 by mbutuzov         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:23:57 by mbutuzov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int		ft_isspace(int c);
 int		ft_isupper(int c);
 int		ft_islower(int c);
 long	ft_strtol(const char *nptr, char **endptr, int base);
-int	ft_count_split(char **texts);
+int		ft_count_split(char **texts);
 char	*ft_split_join(char **tab, char *sep);
-char	*va_str_join(size_t num, ...);
+char	*ft_va_str_join(size_t num, ...);
 char	*va_str_join_sep(size_t num, char *sep, ...);
 
 #endif

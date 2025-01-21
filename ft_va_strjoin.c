@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_va_strjoin.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbutuzov <mbutuzov@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 18:22:56 by mbutuzov          #+#    #+#             */
+/*   Updated: 2025/01/21 18:23:35 by mbutuzov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 // TODO: check va_arg exists?
-char	*va_str_join(size_t num, ...)
+char	*ft_va_str_join(size_t num, ...)
 {
 	va_list	list;
 	char	**str_list;
@@ -25,6 +37,7 @@ char	*va_str_join(size_t num, ...)
 	free(str_list);
 	return (text);
 }
+
 char	*va_str_join_sep(size_t num, char *sep, ...)
 {
 	va_list	list;
